@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "bcex",
+    "name": "Buildcraft extensions",
+    "description": "Adds some useful stuff to buildcraft",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Riftomer"
+    ],
+    "credits": "I want to credit authors of buildcraft for their really awesome mod.",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
