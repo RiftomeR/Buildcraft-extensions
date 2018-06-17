@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import riftomer.bcex.gui.container.ContainerAdvIronPipe;
 
 public class GuiPipeAdvIron extends GuiBC8<ContainerAdvIronPipe> {
-    private static final GuiButtonDrawable.Builder WDGET_BUTTON_BUILDER = new GuiButtonDrawable.Builder(new GuiRectangle(40, 20), new GuiIcon(new ResourceLocation("buildcrafttransport:textures/gui/pipe_emzuli.png"), 176, 0, 20, 20, 256));
+    private static final GuiButtonDrawable.Builder WDGET_BUTTON_BUILDER = new GuiButtonDrawable.Builder(new GuiRectangle(20, 20), new GuiIcon(new ResourceLocation("buildcrafttransport:textures/gui/pipe_emzuli.png"), 176, 0, 20, 20, 256));
 
     public GuiPipeAdvIron(ContainerAdvIronPipe container) {
         super(container);
@@ -27,11 +27,12 @@ public class GuiPipeAdvIron extends GuiBC8<ContainerAdvIronPipe> {
 
     private void addWidgetButton(ContainerAdvIronPipe.ColorWidget widget, int x, int y) {
         IGuiPosition pos = mainGui.rootElement.offset(x, y);
-        GuiButtonDrawable button = new GuiButtonDrawable(mainGui, widget.fromColor.name(), pos, WDGET_BUTTON_BUILDER);
+        GuiButtonDrawable button = new GuiButtonDrawable(mainGui, widget.fromColor.name(), pos.offset(20,0), WDGET_BUTTON_BUILDER);
         button.registerListener((b, u) -> widget.nextColor());
         mainGui.shownElements.add(button);
+        mainGui.shownElements.add(button.createTextElement(">"));
         IGuiArea fromArea = new GuiRectangle(20, 20).offset(pos);
-        IGuiArea toArea = new GuiRectangle(20, 20).offset(pos).offset(20, 0);
+        IGuiArea toArea = new GuiRectangle(20, 20).offset(pos).offset(40, 0);
         ISimpleDrawable fromIcon = (_x, _y) -> GuiIcon.drawAt(BCTransportSprites.ACTION_PIPE_COLOUR[widget.fromColor.color.ordinal()], _x + 2, _y + 2, 16);
         ISimpleDrawable toIcon = (_x, _y) -> GuiIcon.drawAt(BCTransportSprites.ACTION_PIPE_COLOUR[widget.toColor.color.ordinal()], _x + 2, _y + 2, 16);
         mainGui.shownElements.add(new GuiElementDrawable(mainGui, fromArea, fromIcon, false));
