@@ -13,28 +13,19 @@ import riftomer.bcex.init.ModGuis;
 
 import java.io.IOException;
 
-
-public class PipeBehaviourAdvancedIron extends PipeBehaviour {
-    public byte[] faces;
-
-    public PipeBehaviourAdvancedIron(IPipe pipe) {
+public class PipeBehaviourDistribution extends PipeBehaviour {
+    public PipeBehaviourDistribution(IPipe pipe) {
         super(pipe);
-        faces = new byte[6];
-        for (EnumFacing facing : EnumFacing.values()) {
-            faces[facing.ordinal()] = (byte) facing.getOpposite().ordinal();
-        }
     }
 
-    public PipeBehaviourAdvancedIron(IPipe pipe, NBTTagCompound nbt) {
+    public PipeBehaviourDistribution(IPipe pipe, NBTTagCompound nbt) {
         super(pipe, nbt);
         readFromNBT(nbt);
     }
 
     @Override
     public NBTTagCompound writeToNbt() {
-        NBTTagCompound nbt = super.writeToNbt();
-        nbt.setByteArray("faces", faces);
-        return nbt;
+        return super.writeToNbt();
     }
 
     @Override
@@ -49,11 +40,7 @@ public class PipeBehaviourAdvancedIron extends PipeBehaviour {
     public void readPayload(PacketBuffer buffer, Side side, MessageContext ctx) throws IOException {
         super.readPayload(buffer, side, ctx);
         if (side.isClient()) {
-            try {
-                readFromNBT(buffer.readCompoundTag());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            readFromNBT(buffer.readCompoundTag());
         }
     }
 
@@ -68,24 +55,11 @@ public class PipeBehaviourAdvancedIron extends PipeBehaviour {
 
     @Override
     public boolean onPipeActivate(EntityPlayer player, RayTraceResult trace, float hitX, float hitY, float hitZ, EnumPipePart part) {
-        if (!player.world.isRemote) {
-            ModGuis.ADV_IRON_PIPE.openGui(player, pipe.getHolder().getPipePos());
-        }
+        ModGuis.DISTRIBUTION_PIPE.openGui(player, pipe.getHolder().getPipePos());
         return true;
     }
 
-    private void readFromNBT(NBTTagCompound nbt) {
-        faces = nbt.getByteArray("faces");
+    public void readFromNBT(NBTTagCompound nbt) {
 
-    }
-
-    @PipeEventHandler
-    public void onSideCheck(PipeEventItem.SideCheck event) {
-        event.disallowAllExcept(EnumFacing.values()[faces[event.from.ordinal()]]);
-    }
-
-    @PipeEventHandler
-    public void onTryBounce(PipeEventItem.TryBounce event) {
-        event.canBounce = true;
     }
 }

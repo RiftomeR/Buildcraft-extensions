@@ -7,8 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import riftomer.bcex.BCExtensions;
-import riftomer.bcex.gui.container.ContainerAdvIronPipe;
-import riftomer.bcex.gui.container.ContainerDropPipe;
+import riftomer.bcex.gui.container.*;
 import riftomer.bcex.init.ModGuis;
 
 import javax.annotation.Nullable;
@@ -30,6 +29,8 @@ public class Proxy implements IGuiHandler {
             return new ContainerDropPipe(player, (IPipeHolder) world.getTileEntity(new BlockPos(x, y, z)));
         } else if (gui.equals(ModGuis.ADV_IRON_PIPE)) {
             return new ContainerAdvIronPipe(player, (IPipeHolder) world.getTileEntity(new BlockPos(x, y, z)));
+        } else if (gui.equals(ModGuis.DISTRIBUTION_PIPE)) {
+            return new ContainerDistributionPipe(player, (IPipeHolder) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }

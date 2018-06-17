@@ -9,12 +9,14 @@ public class ModItems {
     public static ItemPipeHolder dropPipe;
     public static ItemPipeHolder advIronPipe;
     public static ItemPipeHolder bouncyPipe;
+    public static ItemPipeHolder distributionPipe;
 
     public static void preInit() {
         manageTags();
         dropPipe = BCTransportItems.makePipeItem(ModPipes.drop_item);
         advIronPipe = BCTransportItems.makePipeItem(ModPipes.advancedIron_item);
         bouncyPipe = BCTransportItems.makePipeItem(ModPipes.bouncy_item);
+        distributionPipe = BCTransportItems.makePipeItem(ModPipes.distribution_item);
     }
 
     private static void manageTags() {
@@ -22,6 +24,7 @@ public class ModItems {
         addPipeTag("drop_item", "PipeDrop");
         addPipeTag("advancediron_item", "PipeAdvancedIron");
         addPipeTag("bouncy_item", "PipeBouncy");
+        addPipeTag("distribution_item", "PipeDistributionItem");
         TagManager.endBatch(TagManager.setTab("bcex.pipes"));
     }
 
