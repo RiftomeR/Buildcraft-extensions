@@ -5,6 +5,7 @@ import buildcraft.transport.BCTransport;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.apache.logging.log4j.Logger;
 import riftomer.bcex.init.*;
 import riftomer.bcex.proxy.Proxy;
 
@@ -17,8 +18,11 @@ public class BCExtensions {
     @Mod.Instance
     public static BCExtensions INSTANCE;
 
+    public static Logger logger;
+
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
+        logger = event.getModLog();
         ModPipes.preInit();
         ModTabs.preInit();
         ModItems.preInit();
