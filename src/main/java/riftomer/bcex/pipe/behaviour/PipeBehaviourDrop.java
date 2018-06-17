@@ -48,16 +48,6 @@ public class PipeBehaviourDrop extends PipeBehaviour {
         return PipeFaceTex.get(getFacing() == null ? 1 : 0);
     }
 
-    @Override
-    public boolean onPipeActivate(EntityPlayer player, RayTraceResult trace, float hitX, float hitY, float hitZ, EnumPipePart part) {
-        if (!player.world.isRemote) {
-            if (player.getGameProfile().equals(pipe.getHolder().getOwner())) {
-                ModGuis.DROP_PIPE.openGui(player, pipe.getHolder().getPipePos());
-            }
-        }
-        return true;
-    }
-
     @PipeEventHandler
     public void onDropItem(PipeEventItem.Drop drop) {
         if (!pipe.getHolder().getPipeWorld().isRemote) {
